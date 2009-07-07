@@ -18,9 +18,9 @@ tie *STDOUT, __PACKAGE__;
 sub TIEHANDLE { my $i; bless \$i, shift }
 
 sub READLINE {
-	my $len = read_amount(2);
+	my $len = read_amount(4);
 	return unless defined $len;
-	$len = unpack( 'n', $len );
+	$len = unpack( 'N', $len );
 	return read_amount($len);
 }
 
@@ -28,7 +28,7 @@ sub PRINT {
 	shift();
 	my $len;
 	$len += length for @_;
-	print $stdout pack( 'n', $len ), @_;
+	print $stdout pack( 'N', $len ), @_;
 }
 
 sub read_amount {
