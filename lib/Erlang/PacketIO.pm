@@ -26,7 +26,8 @@ sub READLINE {
 
 sub PRINT {
 	shift();
-	my $len;
+	my $len = 0;
+	no warnings 'uninitialized';
 	$len += length for @_;
 	print $stdout pack( 'N', $len ), @_;
 }
